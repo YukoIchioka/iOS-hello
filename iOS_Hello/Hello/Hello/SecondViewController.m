@@ -33,7 +33,7 @@
         // Custom initialization
         
         // 画像とラベルを、自分のメソッドである arrayInitialize でいれておくよ。
-        [self arrayInitialize];
+//        [self arrayInitialize];
         // buttonCountも初期化
         buttonCount = 0;
     }
@@ -118,8 +118,8 @@
 {
     // 画像はこのクラスのInitの時に配列にいれておくよ。
     // UIImageで自動でリサイズしてもらうにはpng形式じゃないとだめ。
-    UIImage *image1 = [UIImage imageNamed:@"image"];
-    UIImage *image2 = [UIImage imageNamed:@"image2"];
+    UIImage *image1 = [UIImage imageNamed:@"image01"];
+    UIImage *image2 = [UIImage imageNamed:@"image02"];
     
     self.imageArray = @[image1, image2];
     
