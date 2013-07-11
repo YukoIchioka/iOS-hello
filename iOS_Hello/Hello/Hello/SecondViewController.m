@@ -17,6 +17,7 @@
     UIButton *button;
     UIButton *button2;
     int buttonCount;
+    UIImage *image01;
 }
 @property (copy, nonatomic) NSArray *imageArray;
 @property (copy, nonatomic) NSArray *textArray;
@@ -33,7 +34,7 @@
         // Custom initialization
         
         // 画像とラベルを、自分のメソッドである arrayInitialize でいれておくよ。
-//        [self arrayInitialize];
+        [self viewDidLoad];
         // buttonCountも初期化
         buttonCount = 0;
     }
@@ -53,7 +54,7 @@
     self.view = contentView;    //retainされるので
     [contentView release];      //解放しておくよ
     
-    contentView.backgroundColor = [UIColor whiteColor];
+    contentView.backgroundColor = [UIColor blackColor];
     
     // UIImageなどで、お気に入りの画像をcontentViewにaddSubViewする。
     // UIImageViewを初期化。同時に、始めに表示するのは配列の最初の画像を指定。
@@ -90,6 +91,9 @@
     label = [[UILabel alloc] initWithFrame:CGRectMake(labelX, labelY, labelSize.width, labelSize.height)];
     label.font = labelFont; // Fontはうえで決めたやつね。
     label.text = _textArray[0]; // 初めに表示するテキストは配列の一番始めのやつ。
+    //label.textAlignment = UITextAlignmentCenter;
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = [UIColor whiteColor];
     [contentView addSubview:label];
     [label release];
     
@@ -111,24 +115,62 @@
     [contentView addSubview:button];
     
     
+    button2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    NSString *button2Text = @"▶";
+    CGSize button2TextSize = [button2Text sizeWithFont:labelFont];
+    [button2 setTitle:button2Text forState:UIControlStateNormal];
+    button2.tag = 2;
+    [button2 addTarget:self action:@selector(changeImageAndLabel:) forControlEvents:button2];
+    [contentView addSubview:button2];
+    
+    
+    
     
 }
 
-- (void)arrayInitialize
+//- (void)arrayInitialize
+//{
+//    // 画像はこのクラスのInitの時に配列にいれておくよ。
+//    // UIImageで自動でリサイズしてもらうにはpng形式じゃないとだめ。
+//    UIImage *image1 = [UIImage imageNamed:@"image01"];
+//    UIImage *image2 = [UIImage imageNamed:@"image02"];
+//    
+//    self.imageArray = @[image1, image2];
+//    
+//    // キャプションもinit時に配列にいれておくよ。
+//    NSString *text1 = @"学校のアイドル";
+//    NSString *text2 = @"もふもふ";
+//    
+//    self.textArray = @[text1, text2];
+//}
+- (void)viewDidLoad
 {
-    // 画像はこのクラスのInitの時に配列にいれておくよ。
-    // UIImageで自動でリサイズしてもらうにはpng形式じゃないとだめ。
-    UIImage *image1 = [UIImage imageNamed:@"image01"];
-    UIImage *image2 = [UIImage imageNamed:@"image02"];
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+//    
+//    image01 = [UIImage imageNamed:@"image01.jpg"];
+//    UIImageView *image1;
+//    image1 = [[UIImageView alloc] initWithImage:image01];
+//    image1.frame = CGRectMake(0,0,[image01 size].width,[image01 size].height);
+//    [self.view addSubview:image1];
     
-    self.imageArray = @[image1, image2];
     
-    // キャプションもinit時に配列にいれておくよ。
-    NSString *text1 = @"学校のアイドル";
-    NSString *text2 = @"もふもふ";
     
-    self.textArray = @[text1, text2];
+    
+        UIImage *image1 = [UIImage imageNamed:@"image01.jpg"];
+        UIImage *image2 = [UIImage imageNamed:@"image02.jpg"];
+    
+        self.imageArray = @[image1, image2];
+    
+        // キャプションもinit時に配列にいれておくよ。
+        NSString *text1 = @"中原淳一　少女";
+        NSString *text2 = @"少女の友";
+    
+      self.textArray = @[text1, text2];
+    
 }
+
+
 
 - (void)changeImageAndLabel:(UIButton *)button
 {
@@ -158,11 +200,6 @@
 
 
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
 
 - (void)didReceiveMemoryWarning
 {
